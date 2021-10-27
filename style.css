@@ -90,6 +90,14 @@ body {
     color: var(--halloween-orange);
 }
 
+.container-halloween-footer a,
+.container-halloween-footer a:hover,
+.container-halloween-footer a:focus,
+.container-halloween-footer a:visited {
+    color: var(--halloween-orange);
+    text-decoration: none;
+}
+
 @media (max-width: 768px) {
     .button-halloween-orange {
         width: 100%;
