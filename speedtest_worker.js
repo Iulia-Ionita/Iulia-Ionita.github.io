@@ -442,7 +442,7 @@ function ulTest(done) {
     var reqsmall = [];
     for (var i = 0; i < settings.xhr_ul_blob_megabytes; i++) req.push(r);
     req = new Blob(req);
-    r = new ArrayBuffer(262144);
+    r = new ArrayBuffer(128);
     try {
         r = new Uint32Array(r);
         for (var i = 0; i < r.length; i++) r[i] = Math.random() * maxInt;
