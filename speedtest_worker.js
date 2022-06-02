@@ -48,7 +48,7 @@ var settings = {
     time_dlGraceTime: 1.5, //time to wait in seconds before actually measuring dl speed (wait for TCP window to increase)
     count_ping: 10, // number of pings to perform in ping test
     url_dl: "https://speedtest.de.telekom-vpn.net/download/1GB.bin", // path to a large file or garbage.php, used for download test. must be relative to this js file
-    url_ul: "https://speedtest.de.telekom-vpn.net/upload/upload.php?cors=1",
+    url_ul: "https://speedtest.de.telekom-vpn.net/upload/upload.php?cors=1", // path to an empty file, used for upload test. must be relative to this js file
     url_ping: "https://speedtest.de.telekom-vpn.net/", // path to an empty file, used for ping test. must be relative to this js file
     url_getIp: "backend/getIP.php", // path to getIP.php relative to this js file, or a similar thing that outputs the client's ip
     getIp_ispInfo: true, //if set to true, the server will include ISP info with the IP address
@@ -521,8 +521,6 @@ function ulTest(done) {
                         xhr[i].open("POST", settings.url_ul + url_sep(settings.url_ul) + (settings.mpot ? "cors=true&" : "") + "r=" + Math.random(), true); // random string to prevent caching
                         try {
                             xhr[i].setRequestHeader("Content-Encoding", "identity"); // disable compression (some browsers may refuse it, but data is incompressible anyway)
-                            xhr[i].setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-                            xhr[i].setRequestHeader('Access-Control-Allow-Origin', '*');
                         } catch (e) {}
                         //No Content-Type header in MPOT branch because it triggers bugs in some browsers
                         xhr[i].send(req);
