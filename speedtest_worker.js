@@ -485,6 +485,8 @@ function ulTest(done) {
                         xhr[i].open("POST", settings.url_ul + url_sep(settings.url_ul) + (settings.mpot ? "cors=true&" : "") + "r=" + Math.random(), true); // random string to prevent caching
                         try {
                             xhr[i].setRequestHeader("Content-Encoding", "identity"); // disable compression (some browsers may refuse it, but data is incompressible anyway)
+                            xhr[i].setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                            xhr[i].setRequestHeader('Access-Control-Allow-Origin', '*');
                         } catch (e) {}
                         //No Content-Type header in MPOT branch because it triggers bugs in some browsers
                         xhr[i].send(reqsmall);
@@ -722,8 +724,6 @@ function sendTelemetry(done) {
     } catch (ex) {
         var postData = "extra=" + encodeURIComponent(settings.telemetry_extra) + "&ispinfo=" + encodeURIComponent(JSON.stringify(telemetryIspInfo)) + "&dl=" + encodeURIComponent(dlStatus) + "&ul=" + encodeURIComponent(ulStatus) + "&ping=" + encodeURIComponent(pingStatus) + "&jitter=" + encodeURIComponent(jitterStatus) + "&log=" + encodeURIComponent(settings.telemetry_level > 1 ? log : "");
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-        xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
         xhr.send(postData);
     }
 }
